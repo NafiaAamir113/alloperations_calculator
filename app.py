@@ -64,7 +64,10 @@ elif operation == "Graphing":
     if st.button("Plot"):
         try:
             x = np.linspace(x_min, x_max, 500)
-            y = eval(function)
+            # Use eval with numpy functions explicitly available
+            y = eval(function, {"x": x, "sin": np.sin, "cos": np.cos, "tan": np.tan, 
+                                "log": np.log, "sqrt": np.sqrt, "exp": np.exp, "pi": np.pi, "e": np.e})
+            
             plt.figure(figsize=(8, 6))
             plt.plot(x, y, label=function, color='green')
             plt.title("Graph")
